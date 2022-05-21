@@ -12,9 +12,9 @@ print('shape of x_test:', x_test.shape)
 print('shape of y_test:', y_test.shape)
 
 # Mnist 데이터셋이 어떻게 생겼는지 확인 ##
-plt.rcParams['figure.figsize'] = (5, 5)
-plt.imshow(x_train[0])
-plt.show()
+#plt.rcParams['figure.figsize'] = (5, 5)
+#plt.imshow(x_train[0])
+#plt.show()
 
 
 # reshape and normalization
@@ -26,8 +26,8 @@ x_test = x_test.reshape((10000, 28 * 28)) / 255.0
 model = tf.keras.models.Sequential()
 
 # Stacking layers
-model.add(tf.keras.layers.Dense(128, activation='relu', input_shape=(28*28,)))
-model.add(tf.keras.layers.Dense(64, activation='relu'))
+model.add(tf.keras.layers.Dense(100, activation='relu', input_shape=(28*28,)))
+model.add(tf.keras.layers.Dense(100, activation='relu'))
 model.add(tf.keras.layers.Dense(10, activation='softmax'))
 
 model.summary()
@@ -40,7 +40,7 @@ model.compile(optimizer='sgd',
               metrics=['accuracy'])
 
 model.fit(x_train, y_train,
-          epochs=1,
+          epochs=25,
           verbose=1,
           validation_split=0.2)
 
@@ -53,3 +53,7 @@ print('\n테스트 정확도 : ', test_acc)
 predictions = model.predict(x_test)
 print((np.argmax(predictions[0])))
 print(y_test[0])
+
+
+#plt.imshow(x_test[0].reshape(28, 28))
+#plt.show()
