@@ -26,8 +26,8 @@ x_test = x_test.reshape((10000, 28 * 28)) / 255.0
 model = tf.keras.models.Sequential()
 
 # Stacking layers
-model.add(tf.keras.layers.Dense(100, activation='relu', input_shape=(28*28,)))
-model.add(tf.keras.layers.Dense(100, activation='relu'))
+model.add(tf.keras.layers.Dense(512, activation='relu', input_shape=(28*28,)))
+model.add(tf.keras.layers.Dense(512, activation='relu'))
 model.add(tf.keras.layers.Dense(10, activation='softmax'))
 
 model.summary()
@@ -35,12 +35,12 @@ model.summary()
 
 
 #비용함수 및 최적화 함수 설정
-model.compile(optimizer='sgd',
+model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
 model.fit(x_train, y_train,
-          epochs=25,
+          epochs=30,
           verbose=1,
           validation_split=0.2)
 
